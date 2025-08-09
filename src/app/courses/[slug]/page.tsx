@@ -152,7 +152,7 @@ export default async function SingleCoursePage({ params }: { params: Promise<{ s
 
             {courseData.whatYouWillLearn && courseData.whatYouWillLearn.length > 0 && (
               <section id="what-you-will-learn">
-                <h3 className="text-2xl font-bold mb-4">What You'll Learn</h3>
+                <h3 className="text-2xl font-bold mb-4">What You&apos;ll Learn</h3>
                 <ul className="space-y-3">
                   {courseData.whatYouWillLearn.map((item, index) => (
                     <li key={index} className="flex items-start gap-3">
@@ -224,7 +224,7 @@ export default async function SingleCoursePage({ params }: { params: Promise<{ s
                     <div className="flex items-center mb-4">
                       {[...Array(t.rating)].map((_, i) => <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />)}
                     </div>
-                    <p className="text-lg italic text-muted-foreground mb-6">"{t.content}"</p>
+                    <p className="text-lg italic text-muted-foreground mb-6">&quot;{t.content}&quot;</p>
                     <div className="flex items-center">
                       <Avatar className="h-12 w-12"><AvatarImage src={t.image} /><AvatarFallback>{t.name.split(' ').map(n=>n[0])}</AvatarFallback></Avatar>
                       <div className="ml-4">

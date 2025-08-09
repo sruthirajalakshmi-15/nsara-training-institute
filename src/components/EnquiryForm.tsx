@@ -78,7 +78,7 @@ export function EnquiryForm() {
     <Card className="w-full max-w-lg mx-auto border-border shadow-lg hover:shadow-xl transition-shadow duration-300">
       <CardHeader>
         <CardTitle className="text-2xl font-bold text-foreground">Enquiry Form</CardTitle>
-        <CardDescription>Fill out the form below and we'll get in touch.</CardDescription>
+        <CardDescription>Fill out the form below and we&apos;ll get in touch.</CardDescription>
       </CardHeader>
       <CardContent>
         {/* We need to add a custom class to style the phone input to match shadcn */}

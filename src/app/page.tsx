@@ -146,7 +146,7 @@ export default function HomePage() {
               <span className="text-primary block lg:inline-block lg:ml-4">Expert Online Training</span>
             </h1>
             <p className="mt-6 text-lg leading-8 text-muted-foreground sm:text-xl max-w-3xl mx-auto">
-              Join thousands of professionals who've accelerated their careers through our industry-leading online programs. Learn from experts, build real projects, and land your dream job with our proven methodology.
+              Join thousands of professionals who&apos;ve accelerated their careers through our industry-leading online programs. Learn from experts, build real projects, and land your dream job with our proven methodology.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6 flex-wrap gap-y-4">
               <Button size="lg" className="bg-primary hover:bg-primary/90 text-lg px-8 py-4 shadow-lg">
@@ -240,7 +240,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="mx-auto max-w-2xl text-center mb-16">
                 <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">Why Choose N.SARA Training Institute?</h2>
-                <p className="mt-4 text-lg leading-8 text-muted-foreground">We're committed to your success with proven methodologies and comprehensive support, all online.</p>
+                <p className="mt-4 text-lg leading-8 text-muted-foreground">We&apos;re committed to your success with proven methodologies and comprehensive support, all online.</p>
             </div>
             <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
             {features.map((feature, index) => (
@@ -262,7 +262,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="mx-auto max-w-2xl text-center mb-16">
                 <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">Our Smart & Flexible Online Learning Model</h2>
-                <p className="mt-4 text-lg leading-8 text-muted-foreground">"Designed to fit every learner's lifestyle with prioritized options"</p>
+                <p className="mt-4 text-lg leading-8 text-muted-foreground">&quot;Designed to fit every learner&apos;s lifestyle with prioritized options&quot;</p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {flexibleLearningOptions.map((option, index) => (
@@ -331,7 +331,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Ready to Transform Your Career?</h2>
-            <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-primary-foreground/80">Don't wait to unlock your potential. Our next online cohort is filling up fast. Enroll now and take the first step towards your dream job.</p>
+            <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-primary-foreground/80">Don&apos;t wait to unlock your potential. Our next online cohort is filling up fast. Enroll now and take the first step towards your dream job.</p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <Button size="lg" variant="secondary" className="text-lg px-8 py-4 shadow-lg">
                 <Link href="/enquiry" className="w-full flex items-center justify-center">

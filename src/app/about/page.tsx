@@ -144,7 +144,7 @@ export default function AboutPage() {
               industry-relevant training programs. We are dedicated to empowering students and
               professionals with the skills and knowledge they need to succeed in today’s competitive job
               market. With a team of experienced instructors and a commitment to quality education, we offer
-              both technical and soft skill development courses tailored for various industries. Whether you're
+              both technical and soft skill development courses tailored for various industries. Whether you&apos;re
               looking to advance your career, switch industries, or build foundational skills, N. SARA Training
               Institute is here to guide you every step of the way.
             </p>

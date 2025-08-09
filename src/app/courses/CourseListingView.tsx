@@ -118,7 +118,7 @@ export default function CourseListingView() {
             <div className="text-center py-16">
               <Search className="mx-auto h-12 w-12 text-muted-foreground/50" />
               <h3 className="mt-4 text-xl font-semibold text-foreground">No Courses Found</h3>
-              <p className="mt-2 text-muted-foreground">Try adjusting your search or filter to find what you're looking for.</p>
+              <p className="mt-2 text-muted-foreground">Try adjusting your search or filter to find what you&apos;re looking for.</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
