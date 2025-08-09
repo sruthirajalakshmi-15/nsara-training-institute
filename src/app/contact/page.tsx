@@ -43,6 +43,19 @@ export default function ContactPage() {
                   </Link>
                 </div>
               </div>
+              {/* Email Address */}
+              <div className="flex flex-col sm:flex-row items-start gap-4">
+                <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                  <Mail className="h-6 w-6" />
+                </div>
+                <div className="w-full">
+                  <h3 className="text-lg font-semibold text-foreground">Email Us</h3>
+                  <p className="text-muted-foreground">For general inquiries, support, and course information.</p>
+                  <Link href="mailto:info@nsara.institute" className="text-primary hover:underline font-medium break-all">
+                    info@nsara.institute
+                  </Link>
+                </div>
+              </div>
               
               {/* Phone Number */}
               <div className="flex flex-col sm:flex-row items-start gap-4">
