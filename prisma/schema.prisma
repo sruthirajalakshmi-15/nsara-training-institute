@@ -1,0 +1,27 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Specifies the client generator to use.
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Defines the database connection.
+datasource db {
+  // Use "mysql" as the provider.
+  provider = "mysql"
+  // The URL is loaded from the .env file.
+  url      = env("DATABASE_URL")
+}
+
+// --- Define your database models below ---
+
+// Model for the enquiry form submissions.
+model Enquiry {
+  id        Int      @id @default(autoincrement()) // Primary key
+  name      String
+  email     String   @unique // Ensures each email can only be used once
+  mobile    String
+  country   String?  // The '?' makes this field optional
+  createdAt DateTime @default(now()) // Automatically set on creation
+}
