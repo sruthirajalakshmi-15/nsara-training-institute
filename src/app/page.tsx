@@ -142,8 +142,8 @@ export default function HomePage() {
               </div>
             </div>
             <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-6xl lg:text-7xl">
-              Na thaan da leo Das
-              <span className="text-primary block lg:inline-block lg:ml-4">Nee padicha school la na headmaster da...</span>
+              Transform Your Career with
+              <span className="text-primary block lg:inline-block lg:ml-4">Expert Online Training</span>
             </h1>
             <p className="mt-6 text-lg leading-8 text-muted-foreground sm:text-xl max-w-3xl mx-auto">
               Join thousands of professionals who&apos;ve accelerated their careers through our industry-leading online programs. Learn from experts, build real projects, and land your dream job with our proven methodology.
