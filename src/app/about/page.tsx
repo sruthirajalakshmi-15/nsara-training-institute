@@ -109,8 +109,7 @@ const values = [
 const directContacts = [
   { name: 'Edison Mani', number: '+91 95140 19936' },
   { name: 'Siyarsh', number: '+971 58 856 1969' },
-  { name: 'Muthumurugan', number: '+91 95973 08977' },
-  { name: 'Ajith Kumar', number: '+91 91595 31092' },
+  
 ];
 
 export default function AboutPage() {
