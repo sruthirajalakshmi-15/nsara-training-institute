@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter, usePathname } from 'next/navigation';
 import { Menu, X, ChevronDown, ChevronRight,
-  Code,             // Icons for categories
+  Code,
   Database,
   BrainCircuit,
   Globe,
@@ -15,7 +15,7 @@ import { Menu, X, ChevronDown, ChevronRight,
   Languages,
   LayoutGrid,
   HeartPulse,
-} from 'lucide-react'; // Import all Lucide icons used for categories
+} from 'lucide-react';
 import { Button } from '../components/ui/button';
 import Image from 'next/image';
 import {
@@ -31,12 +31,11 @@ import {
 import { cn } from '../lib/utils';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import { allCourseCategories } from '@/lib/course-data'; // <--- IMPORT CENTRALIZED DATA
-import { Award } from 'lucide-react'; // Import Award icon for footer
+import { allCourseCategories } from '@/lib/course-data';
+import { Award } from 'lucide-react';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
-// Updated navigation links with new order
 const navLinks = [
   { name: "Home", href: "/" },
   { name: "About Us", href: "/about" },
@@ -66,66 +65,38 @@ export default function RootLayout({
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Handle smooth scrolling to sections
   const handleSectionNavigation = (href: string, e?: React.MouseEvent) => {
-    if (e) {
-      e.preventDefault();
-    }
-    
-    // Close mobile menu if open
+    if (e) e.preventDefault();
     setMobileMenuOpen(false);
     
-    // Check if it's a hash link (section navigation)
     if (href.includes('#')) {
       const [path, hash] = href.split('#');
-      
-      // If we're already on the target page, just scroll to the section
       if (pathname === path || (path === '/' && pathname === '/')) {
         const element = document.getElementById(hash);
-        if (element) {
-          element.scrollIntoView({ 
-            behavior: 'smooth', 
-            block: 'start' 
-          });
-        }
+        if (element) element.scrollIntoView({ behavior: 'smooth', block: 'start' });
       } else {
-        // Navigate to the page first, then scroll to section
         router.push(href);
-        // Wait for navigation to complete, then scroll
         setTimeout(() => {
           const element = document.getElementById(hash);
-          if (element) {
-            element.scrollIntoView({ 
-              behavior: 'smooth', 
-              block: 'start' 
-            });
-          }
+          if (element) element.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }, 100);
       }
     } else {
-      // Regular navigation
       router.push(href);
     }
   };
 
   const toggleMobileCategory = (categoryName: string) => {
-    setOpenCategories(prev => ({
-      ...prev,
-      [categoryName]: !prev[categoryName]
-    }));
+    setOpenCategories(prev => ({ ...prev, [categoryName]: !prev[categoryName] }));
   };
 
   const toggleMobileCourseGroup = (courseGroupName: string) => {
-    setOpenCourseGroups(prev => ({
-      ...prev,
-      [courseGroupName]: !prev[courseGroupName]
-    }));
+    setOpenCourseGroups(prev => ({ ...prev, [courseGroupName]: !prev[courseGroupName] }));
   };
 
   return (
     <html lang="en" className="scroll-smooth">
       <body className={cn('min-h-screen bg-background font-sans antialiased', inter.variable)}>
-        {/* Floating Header */}
         <header className={cn(
           "fixed top-4 left-1/2 transform -translate-x-1/2 z-50 transition-all duration-300 ease-in-out",
           "w-[95%] max-w-6xl mx-auto",
@@ -134,7 +105,6 @@ export default function RootLayout({
             : "bg-transparent"
         )}>
           <nav className="flex items-center justify-between p-4 lg:px-8">
-             {/* Enhanced Logo Section with Increased Size */}
             <div className="flex items-center">
               <Link href="/" className="flex items-center space-x-4">
                 <div className="relative">
@@ -164,50 +134,29 @@ export default function RootLayout({
               </Link>
             </div>
             
-            {/* Desktop Navigation with Updated Order */}
             <div className="hidden lg:flex items-center space-x-8">
-              {/* Home Link */}
-              <Link
-                href="/"
-                className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200"
-              >
-                Home
-              </Link>
-
-              {/* About Us Link */}
-              <Link
-                href="/about"
-                className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200"
-              >
-                About Us
-              </Link>
-
-              {/* Courses Dropdown */}
+              <Link href="/" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200">Home</Link>
+              <Link href="/about" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200">About Us</Link>
+              
               <DropdownMenu>
                 <DropdownMenuTrigger className="flex items-center text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200 outline-none">
-                  Courses
-                  <ChevronDown className="ml-1 h-4 w-4" />
+                  Courses <ChevronDown className="ml-1 h-4 w-4" />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-80 p-2">
-                  {allCourseCategories.map((category, index) => ( // Using `allCourseCategories` from course-data.ts
+                  {allCourseCategories.map((category, index) => (
                     <div key={category.name}>
                       <DropdownMenuSub>
                         <DropdownMenuSubTrigger className="flex items-center">
-                          {category.icon && <category.icon className="mr-2 h-4 w-4" />} {/* Using Lucide icon */}
-                          {category.name}
+                          {category.icon && <category.icon className="mr-2 h-4 w-4" />} {category.name}
                         </DropdownMenuSubTrigger>
                         <DropdownMenuSubContent className="w-64">
                           {category.courses.map((courseGroup) => (
                             <DropdownMenuSub key={courseGroup.name}>
-                              <DropdownMenuSubTrigger className="font-medium">
-                                {courseGroup.name}
-                              </DropdownMenuSubTrigger>
+                              <DropdownMenuSubTrigger className="font-medium">{courseGroup.name}</DropdownMenuSubTrigger>
                               <DropdownMenuSubContent className="w-56">
                                 {courseGroup.subcourses.map((subcourse) => (
                                   <DropdownMenuItem key={subcourse.name} className="cursor-pointer">
-                                    <Link href={`/courses/${subcourse.slug}`} className="w-full" onClick={() => setMobileMenuOpen(false)}>
-                                      {subcourse.name}
-                                    </Link>
+                                    <Link href={`/courses/${subcourse.slug}`} className="w-full" onClick={() => setMobileMenuOpen(false)}>{subcourse.name}</Link>
                                   </DropdownMenuItem>
                                 ))}
                               </DropdownMenuSubContent>
@@ -225,21 +174,10 @@ export default function RootLayout({
                 </DropdownMenuContent>
               </DropdownMenu>
 
-              {/* Why Choose Us Link with smooth scrolling */}
-              <button
-                onClick={(e) => handleSectionNavigation("/#why-choose-us", e)}
-                className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none cursor-pointer"
-              >
+              <button onClick={(e) => handleSectionNavigation("/#why-choose-us", e)} className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200 bg-transparent border-none cursor-pointer">
                 Why Choose Us
               </button>
-
-              {/* Contact Link */}
-              <Link
-                href="/contact"
-                className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200"
-              >
-                Contact
-              </Link>
+              <Link href="/contact" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200">Contact</Link>
             </div>
 
             <div className="hidden lg:flex items-center">
@@ -248,131 +186,58 @@ export default function RootLayout({
               </Button>
             </div>
 
-            {/* Mobile Menu Button */}
             <div className="flex lg:hidden">
-              <button
-                type="button"
-                className="p-2 text-muted-foreground hover:text-primary transition-colors"
-                onClick={() => setMobileMenuOpen(true)}
-              >
+              <button type="button" className="p-2 text-muted-foreground hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(true)}>
                 <Menu className="h-6 w-6" />
               </button>
             </div>
           </nav>
         </header>
 
-        {/* Mobile Menu Overlay */}
         {mobileMenuOpen && (
           <div className="lg:hidden fixed inset-0 z-50">
             <div className="fixed inset-0 bg-background/80 backdrop-blur-sm" onClick={() => setMobileMenuOpen(false)} />
             <div className="fixed inset-y-0 right-0 w-full max-w-sm bg-card border-l border-border shadow-xl flex flex-col">
-             {/* Enhanced Mobile Menu Header with Larger Logo */}
               <div className="flex items-center justify-between p-6 border-b border-border/50">
                 <Link href="/" className="flex items-center space-x-3">
-                  <Image
-                    src="/nsara-logo2.png"
-                    alt="N.SARA Training Institute Logo"
-                    width={60}
-                    height={60}
-                    className="h-15 w-auto"
-                  />
+                  <Image src="/nsara-logo2.png" alt="N.SARA Training Institute Logo" width={60} height={60} className="h-15 w-auto" />
                   <div className="flex flex-col">
-                    <span className="text-xl font-bold">
-                      <span className="text-primary">N.</span>SARA
-                    </span>
-                    <div className="flex items-center space-x-1">
-                      <Award className="h-3 w-3 text-primary" />
-                      <span className="text-xs font-semibold text-primary">KHDA-Certified</span>
-                    </div>
+                    <span className="text-xl font-bold"><span className="text-primary">N.</span>SARA</span>
+                    <div className="flex items-center space-x-1"><Award className="h-3 w-3 text-primary" /><span className="text-xs font-semibold text-primary">KHDA-Certified</span></div>
                   </div>
                 </Link>
-                <button
-                  type="button"
-                  className="p-2 text-muted-foreground hover:text-primary transition-colors"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  <X className="h-6 w-6" />
-                </button>
+                <button type="button" className="p-2 text-muted-foreground hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}><X className="h-6 w-6" /></button>
               </div>
 
-              {/* Scrollable Menu Content */}
               <div className="flex-1 overflow-y-auto">
                 <div className="px-6 py-4">
                   <div className="space-y-2">
-                    {/* Home Link */}
-                    <Link
-                      href="/"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="block px-4 py-3 text-base font-medium text-muted-foreground hover:text-primary hover:bg-muted rounded-lg transition-colors"
-                    >
-                      Home
-                    </Link>
-
-                    {/* About Us Link */}
-                    <Link
-                      href="/about"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="block px-4 py-3 text-base font-medium text-muted-foreground hover:text-primary hover:bg-muted rounded-lg transition-colors"
-                    >
-                      About Us
-                    </Link>
-
-                    {/* Mobile Courses Section */}
+                    <Link href="/" onClick={() => setMobileMenuOpen(false)} className="block px-4 py-3 text-base font-medium text-muted-foreground hover:text-primary hover:bg-muted rounded-lg transition-colors">Home</Link>
+                    <Link href="/about" onClick={() => setMobileMenuOpen(false)} className="block px-4 py-3 text-base font-medium text-muted-foreground hover:text-primary hover:bg-muted rounded-lg transition-colors">About Us</Link>
+                    
                     <div className="space-y-2">
-                      <button
-                        onClick={() => setMobileCoursesOpen(!mobileCoursesOpen)}
-                        className="flex items-center justify-between w-full px-4 py-3 text-base font-medium text-muted-foreground hover:text-primary hover:bg-muted rounded-lg transition-colors"
-                      >
-                        <span>Courses</span>
-                        <ChevronRight className={cn(
-                          "h-4 w-4 transition-transform duration-200",
-                          mobileCoursesOpen && "rotate-90"
-                        )} />
+                      <button onClick={() => setMobileCoursesOpen(!mobileCoursesOpen)} className="flex items-center justify-between w-full px-4 py-3 text-base font-medium text-muted-foreground hover:text-primary hover:bg-muted rounded-lg transition-colors">
+                        <span>Courses</span><ChevronRight className={cn("h-4 w-4 transition-transform duration-200", mobileCoursesOpen && "rotate-90")} />
                       </button>
-
                       {mobileCoursesOpen && (
                         <div className="pl-4 space-y-2">
-                          {allCourseCategories.map((category) => ( // Using `allCourseCategories`
+                          {allCourseCategories.map((category) => (
                             <div key={category.name} className="space-y-2">
-                              <button
-                                onClick={() => toggleMobileCategory(category.name)}
-                                className="flex items-center justify-between w-full px-4 py-2 text-sm font-medium text-muted-foreground hover:text-primary hover:bg-muted rounded-lg transition-colors"
-                              >
-                                <span className="flex items-center">
-                                  {category.icon && <category.icon className="mr-2 h-4 w-4" />}
-                                  {category.name}
-                                </span>
-                                <ChevronRight className={cn(
-                                  "h-3 w-3 transition-transform duration-200",
-                                  openCategories[category.name] && "rotate-90"
-                                )} />
+                              <button onClick={() => toggleMobileCategory(category.name)} className="flex items-center justify-between w-full px-4 py-2 text-sm font-medium text-muted-foreground hover:text-primary hover:bg-muted rounded-lg transition-colors">
+                                <span className="flex items-center">{category.icon && <category.icon className="mr-2 h-4 w-4" />} {category.name}</span>
+                                <ChevronRight className={cn("h-3 w-3 transition-transform duration-200", openCategories[category.name] && "rotate-90")} />
                               </button>
-
                               {openCategories[category.name] && (
                                 <div className="pl-6 space-y-1">
                                   {category.courses.map((courseGroup) => (
                                     <div key={courseGroup.name} className="space-y-1">
-                                      <button
-                                        onClick={() => toggleMobileCourseGroup(courseGroup.name)}
-                                        className="flex items-center justify-between w-full px-3 py-1 text-xs font-semibold text-primary uppercase tracking-wide hover:bg-muted rounded-md"
-                                      >
-                                        {courseGroup.name}
-                                        <ChevronRight className={cn(
-                                          "h-3 w-3 transition-transform duration-200",
-                                          openCourseGroups[courseGroup.name] && "rotate-90"
-                                        )} />
+                                      <button onClick={() => toggleMobileCourseGroup(courseGroup.name)} className="flex items-center justify-between w-full px-3 py-1 text-xs font-semibold text-primary uppercase tracking-wide hover:bg-muted rounded-md">
+                                        {courseGroup.name} <ChevronRight className={cn("h-3 w-3 transition-transform duration-200", openCourseGroups[courseGroup.name] && "rotate-90")} />
                                       </button>
                                       {openCourseGroups[courseGroup.name] && (
                                         <div className="pl-6 space-y-1">
                                           {courseGroup.subcourses.map((subcourse) => (
-                                            <Link
-                                              key={subcourse.name}
-                                              href={`/courses/${subcourse.slug}`}
-                                              onClick={() => setMobileMenuOpen(false)}
-                                              className="block px-3 py-2 text-sm text-muted-foreground hover:text-primary hover:bg-muted rounded-md transition-colors"
-                                            >
-                                              {subcourse.name}
-                                            </Link>
+                                            <Link key={subcourse.name} href={`/courses/${subcourse.slug}`} onClick={() => setMobileMenuOpen(false)} className="block px-3 py-2 text-sm text-muted-foreground hover:text-primary hover:bg-muted rounded-md transition-colors">{subcourse.name}</Link>
                                           ))}
                                         </div>
                                       )}
@@ -382,71 +247,36 @@ export default function RootLayout({
                               )}
                             </div>
                           ))}
-                          <Link
-                            href="/courses"
-                            onClick={() => setMobileMenuOpen(false)}
-                            className="block px-4 py-2 text-sm font-medium text-primary hover:bg-muted rounded-lg transition-colors"
-                          >
-                            View All Courses
-                          </Link>
+                          <Link href="/courses" onClick={() => setMobileMenuOpen(false)} className="block px-4 py-2 text-sm font-medium text-primary hover:bg-muted rounded-lg transition-colors">View All Courses</Link>
                         </div>
                       )}
                     </div>
 
-                    {/* Why Choose Us Link with smooth scrolling for mobile */}
-                    <button
-                      onClick={(e) => handleSectionNavigation("/#why-choose-us", e)}
-                      className="block w-full text-left px-4 py-3 text-base font-medium text-muted-foreground hover:text-primary hover:bg-muted rounded-lg transition-colors"
-                    >
-                      Why Choose Us
-                    </button>
-
-                    {/* Contact Link */}
-                    <Link
-                      href="/contact"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="block px-4 py-3 text-base font-medium text-muted-foreground hover:text-primary hover:bg-muted rounded-lg transition-colors"
-                    >
-                      Contact
-                    </Link>
+                    <button onClick={(e) => handleSectionNavigation("/#why-choose-us", e)} className="block w-full text-left px-4 py-3 text-base font-medium text-muted-foreground hover:text-primary hover:bg-muted rounded-lg transition-colors">Why Choose Us</button>
+                    <Link href="/contact" onClick={() => setMobileMenuOpen(false)} className="block px-4 py-3 text-base font-medium text-muted-foreground hover:text-primary hover:bg-muted rounded-lg transition-colors">Contact</Link>
                   </div>
                 </div>
               </div>
 
-              {/* Mobile Menu Footer */}
               <div className="p-6 border-t border-border">
-                <Button className="w-full bg-primary hover:bg-primary/90">
-                  <Link href="/enquiry" className="w-full">Enquiry Now</Link>
-                </Button>
+                <Button className="w-full bg-primary hover:bg-primary/90"><Link href="/enquiry" className="w-full">Enquiry Now</Link></Button>
               </div>
             </div>
           </div>
         )}
 
-        {/* Main Content */}
         <main className="pt-20">{children}</main>
 
-        {/* Enhanced Footer */}
+        {/* --- ENHANCED & UPDATED FOOTER --- */}
         <footer className="bg-card border-t border-border">
           <div className="mx-auto max-w-7xl px-6 lg:px-8 py-16">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8"> {/* Changed to 5 columns for better layout */}
               <div className="lg:col-span-2">
                  <div className="flex items-center space-x-3 mb-3">
-                  <Image
-                    src="/nsara-logo2.png"
-                    alt="N.SARA Training Institute Logo"
-                    width={80}
-                    height={80}
-                    className="h-25 w-auto"
-                  />
+                  <Image src="/nsara-logo2.png" alt="N.SARA Training Institute Logo" width={80} height={80} className="h-25 w-auto" />
                   <div className="flex flex-col">
-                    <span className="text-2xl font-bold">
-                      <span className="text-primary">N.</span>SARA
-                    </span>
-                    <div className="flex items-center space-x-1 mt-1">
-                      <Award className="h-3 w-3 text-primary" />
-                      <span className="text-xs font-semibold text-primary">KHDA-Certified</span>
-                    </div>
+                    <span className="text-2xl font-bold"><span className="text-primary">N.</span>SARA</span>
+                    <div className="flex items-center space-x-1 mt-1"><Award className="h-3 w-3 text-primary" /><span className="text-xs font-semibold text-primary">KHDA-Certified</span></div>
                   </div>
                 </div>
                 <p className="text-muted-foreground mb-6 max-w-md">
@@ -465,36 +295,30 @@ export default function RootLayout({
                   <li><Link href="/" className="hover:text-primary transition-colors">Home</Link></li>
                   <li><Link href="/about" className="hover:text-primary transition-colors">About Us</Link></li>
                   <li><Link href="/courses" className="hover:text-primary transition-colors">All Courses</Link></li>
-                  <li>
-                    <button
-                      onClick={(e) => handleSectionNavigation("/#why-choose-us", e)}
-                      className="hover:text-primary transition-colors text-left bg-transparent border-none cursor-pointer p-0"
-                    >
-                      Why Choose Us
-                    </button>
-                  </li>
+                  <li><button onClick={(e) => handleSectionNavigation("/#why-choose-us", e)} className="hover:text-primary transition-colors text-left bg-transparent border-none cursor-pointer p-0">Why Choose Us</button></li>
                   <li><Link href="/contact" className="hover:text-primary transition-colors">Contact</Link></li>
                   <li><Link href="/enquiry" className="hover:text-primary transition-colors">Enquiry Now</Link></li>
                 </ul>
               </div>
               <div>
                 <h4 className="font-semibold text-foreground mb-4">Support & Contact</h4>
+                {/* --- CONTACT DETAILS UPDATED HERE --- */}
                 <ul className="space-y-3 text-muted-foreground">
-                  <li><Link href="/contact" className="hover:text-primary transition-colors">Contact Us</Link></li>
-                  <li><a href="mailto:admissions@nsara.com" className="hover:text-primary transition-colors">admissions@nsara.com</a></li>
+                  <li><a href="mailto:info@nsarainstitute.com" className="hover:text-primary transition-colors">info@nsarainstitute.com</a></li>
+                  <li className="font-medium text-foreground/80 pt-2">Dubai, UAE</li>
                   <li><a href="tel:+971588561969" className="hover:text-primary transition-colors">+971 58 856 1969</a></li>
-                  <li><Link href="/privacy-policy" className="hover:text-primary transition-colors">Privacy Policy</Link></li>
-                  <li><Link href="/terms-of-service" className="hover:text-primary transition-colors">Terms of Service</Link></li>
+                  <li><a href="tel:+971508557323" className="hover:text-primary transition-colors">+971 50 855 7323</a></li>
+                  <li className="font-medium text-foreground/80 pt-2">Bangalore, India</li>
+                  <li><a href="tel:+919514019936" className="hover:text-primary transition-colors">+91 95140 19936</a></li>
+                  <li><a href="tel:+918610455389" className="hover:text-primary transition-colors">+91 86104 55389</a></li>
                 </ul>
               </div>
               <div>
                 <h4 className="font-semibold text-foreground mb-4">Our Programs</h4>
                 <ul className="space-y-3 text-muted-foreground">
-                  {allCourseCategories.map(category => (
+                  {allCourseCategories.slice(0, 7).map(category => ( // Show first 7 categories
                     <li key={category.slug}>
-                      <Link href={`/courses#${category.slug}`} className="hover:text-primary transition-colors">
-                        {category.name}
-                      </Link>
+                      <Link href={`/courses#${category.slug}`} className="hover:text-primary transition-colors">{category.name}</Link>
                     </li>
                   ))}
                 </ul>
